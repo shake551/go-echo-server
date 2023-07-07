@@ -1,13 +1,17 @@
 package main
 
 import (
+	"flag"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
+var textFlag = flag.String("text", "Hello World!", "")
+
 func main() {
+	flag.Parse()
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -19,5 +23,5 @@ func main() {
 }
 
 func hello(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
+	return c.String(http.StatusOK, *textFlag+"\n")
 }
