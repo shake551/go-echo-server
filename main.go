@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -23,5 +24,10 @@ func main() {
 }
 
 func hello(c echo.Context) error {
+	if *textFlag == "foo" {
+		for i := 0; i < 1000000; i++ {
+			fmt.Println(i)
+		}
+	}
 	return c.String(http.StatusOK, *textFlag+"\n")
 }
